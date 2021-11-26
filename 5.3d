@@ -1,346 +1,74 @@
 from tkinter import *
 import tkinter.font
-from gpiozero import LED
-import RPi.GPIO
-import RPi.GPIO as GPIO
 import time
-RPi.GPIO.setmode(RPi.GPIO.BCM)
+import RPi.GPIO as GPIO
+from gpiozero import LED
+GPIO.setmode(GPIO.BCM)
 
-led = LED(23)
+Code = {
+'A' : '.-' ,
+'B' : '-...' ,
+'C' : '-.-.' ,
+'D' : '-..' ,
+'E' : '.' ,
+'F' : '..-.' ,
+'G' : '--.' ,
+'H' : '....' ,
+'I' : '..' ,
+'J' : '.---' ,
+'K' : '-.-' ,
+'L' : '.-..' ,
+'M' : '--' ,
+'N' : '-.' ,
+'O' : '---' ,
+'P' : '.--.' ,
+'Q' : '--.-' ,
+'R' : '.-.' ,
+'S' : '...' ,
+'T' : '-' ,
+'U' : '..-' ,
+'V' : '...-' ,
+'W' : '.--' ,
+'X' : '-..-' ,
+'Y' : '-.--' ,
+'Z' : '--..'
+}
 
-GPIO.setup(22, GPIO.OUT )
+LED = 7
+GPIO.setup(LED, GPIO.OUT)
 
-def letterSpacing():
-    GPIO.output(pin, 0)
-    time.sleep(0.3)
+win = Tk()
+win.title("Morse Converter")
+Font_style = tkinter.font.Font( family = 'Cambaria', size = 20, weight = "bold")
 
-def blink_dot():
-    GPIO.output(pin, 1)
-    time.sleep(0.8)
-    letterSpacing()
-
-def blink_dash():
-    GPIO.output(pin, 1)
-    time.sleep(1.5)
-    letterSpacing()
-
-def word_space():
-    GPIO.output(pin, 1)
-    time.sleep(2.3)
-
-def messageEnd():
-    blink_dot()
-    blink_dash()
-    blink_dot()
-    blink_dash()
-    blink_dot()
+def Dash_func():
+    GPIO.output(LED, GPIO.HIGH)
+    time.sleep(0.4)
+    GPIO.output(LED, GPIO.LOW)
+    time.sleep(0.13)
     
-    
-  
-name =input("Enter the text to be changed: ")
-name = name.lower()
+def Dot_func():
+    GPIO.output(LED, GPIO.HIGH)
+    time.sleep(0.13)
+    GPIO.output(LED, GPIO.LOW)
+    time.sleep(0.13)
 
-for char in name:
-    print ("Starting transmition of: %s") % (str)
-    if char == "1":
-        blink_dot()
-        blink_dash()
-        blink_dash()
-        blink_dash()
-        blink_dash()
-    elif char == "2":
-        blink_dot()
-        blink_dot()
-        blink_dash()
-        blink_dash()
-        blink_dash()
-    elif char == "3":
-        blink_dot()
-        blink_dot()
-        blink_dot()
-        blink_dash()
-        blink_dash()
-    elif char == "4":
-        blink_dot()
-        blink_dot()
-        blink_dot()
-        blink_dot()
-        blink_dash()
-    elif char == "5":
-        blink_dot()
-        blink_dot()
-        blink_dot()
-        blink_dot()
-        blink_dot()
-    elif char == "6":
-        blink_dash()
-        blink_dot()
-        blink_dot()
-        blink_dot()
-        blink_dot()
-    elif char == "7":
-        blink_dash()
-        blink_dash()
-        blink_dot()
-        blink_dot()
-        blink_dot()
-    elif char == "8":
-        blink_dash()
-        blink_dash()
-        blink_dash()
-        blink_dot()
-        blink_dot()
-    elif char == "9":
-        blink_dash()
-        blink_dash()
-        blink_dash()
-        blink_dash()
-        blink_dot()
-    elif char == "0":
-        blink_dash()
-        blink_dash()
-        blink_dash()
-        blink_dash()
-        blink_dash()
-    elif char == " ":
-        word_space()
-    elif char == "a":
-        blink_dot()
-        blink_dash()
-    elif char == "b":
-        blink_dash()
-        blink_dot()
-        blink_dot()
-        blink_dot()
-    elif char == "c":
-        blink_dash()
-        blink_dot()
-        blink_dash()
-        blink_dot()
-    elif char == "d":
-        blink_dash()
-        blink_dot()
-        blink_dot()
-    elif char == "e":
-        blink_dot()
-    elif char == "f":
-        blink_dot()
-        blink_dot()
-        blink_dash()
-        blink_dot()
-    elif char == "g":
-        blink_dash()
-        blink_dash()
-        blink_dot()
-    elif char == "h":
-        blink_dot()
-        blink_dot()
-        blink_dot()
-        blink_dot()
-    elif char == "i":
-        blink_dot()
-        blink_dot()
-    elif char == "j":
-        blink_dot()
-        blink_dash()
-        blink_dash()
-        blink_dash()
-    elif char == "k":
-        blink_dash()
-        blink_dot()
-        blink_dash()
-    elif char == "l":
-        blink_dot()
-        blink_dash()
-        blink_dot()
-        blink_dot()
-    elif char == "m":
-        blink_dash()
-        blink_dash()
-    elif char == "n":
-        blink_dash()
-        blink_dot()
-    elif char == "o":
-        blink_dash()
-        blink_dash()
-        blink_dash()
-    elif char == "p":
-        blink_dot()
-        blink_dash()
-        blink_dash()
-        blink_dot()
-    elif char == "q":
-        blink_dash()
-        blink_dash()
-        blink_dot()
-        blink_dash()
-    elif char == "r":
-        blink_dot()
-        blink_dash()
-        blink_dot()
-    elif char == "s":
-        blink_dot()
-        blink_dot()
-        blink_dot()
-    elif char == "t":
-        blink_dash()
-    elif char == "u":
-        blink_dot()
-        blink_dot()
-        blink_dash()
-    elif char == "v":
-        blink_dot()
-        blink_dot()
-        blink_dot()
-        blink_dash()
-    elif char == "w":
-        blink_dot()
-        blink_dash()
-        blink_dash()
-    elif char == "x":
-        blink_dash()
-        blink_dot()
-        blink_dot()
-        blink_dash()
-    elif char == "y":
-        blink_dash()
-        blink_dot()
-        blink_dash()
-        blink_dash()
-    elif char == "z":
-        blink_dash()
-        blink_dash()
-        blink_dot()
-        blink_dot()
-    elif char == ".":
-        blink_dot()
-        blink_dash()
-        blink_dot()
-        blink_dash()
-        blink_dot()
-        blink_dash()
-        blink_dash()
-        blink_dash()
-    elif char == ",":
-        blink_dash()
-        blink_dash()
-        blink_dot()
-        blink_dot()
-        blink_dash()
-        blink_dash()
-    elif char == "?":
-        blink_dot()
-        blink_dot()
-        blink_dash()
-        blink_dash()
-        blink_dot()
-        blink_dot()
-    elif char == "'":
-        blink_dot()
-        blink_dash()
-        blink_dash()
-        blink_dash()
-        blink_dash()
-        blink_dot()
-    elif char == "!":
-        blink_dash()
-        blink_dot()
-        blink_dash()
-        blink_dot()
-        blink_dash()
-        blink_dash()
-    elif char == "/":
-        blink_dash()
-        blink_dot()
-        blink_dot()
-        blink_dash()
-        blink_dot()
-    elif char == "\\":
-        blink_dash()
-        blink_dot()
-        blink_dot()
-        blink_dash()
-        blink_dot()
-    elif char == "(":
-        blink_dash()
-        blink_dot()
-        blink_dash()
-        blink_dash()
-        blink_dot()
-    elif char == ")":
-        blink_dash()
-        blink_dot()
-        blink_dash()
-        blink_dash()
-        blink_dot()
-        blink_dash()
-    elif char == "&":
-        blink_dot()
-        blink_dash()
-        blink_dot()
-        blink_dot()
-        blink_dot()
-    elif char == ":":
-        blink_dash()
-        blink_dash()
-        blink_dash()
-        blink_dash()
-        blink_dot()
-        blink_dot()
-        blink_dot()
-    elif char == ";":
-        blink_dash()
-        blink_dot()
-        blink_dash()
-        blink_dot()
-        blink_dash()
-        blink_dot()
-    elif char == "=":
-        blink_dash()
-        blink_dot()
-        blink_dot()
-        blink_dot()
-        blink_dash()
-    elif char == "-":
-        blink_dash()
-        blink_dot()
-        blink_dot()
-        blink_dot()
-        blink_dot()
-        blink_dash()
-    elif char == "_":
-        blink_dot()
-        blink_dot()
-        blink_dash()
-        blink_dash()
-        blink_dot()
-        blink_dash()
-    elif char == "\"":
-        blink_dot()
-        blink_dash()
-        blink_dot()
-        blink_dot()
-        blink_dash()
-        blink_dot()
-    elif char == "$":
-        blink_dot()
-        blink_dot()
-        blink_dot()
-        blink_dash()
-        blink_dot()
-        blink_dot()
-        blink_dash()
-    elif char == "@":
-        blink_dot()
-        blink_dash()
-        blink_dash()
-        blink_dot()
-        blink_dash()
-        blink_dot()
-    else:
-        print ("This chater cannot be changed to morse code '%s'") % (char)
-        
-print("Finishing transmission")
-word_space()
-messageEnd()
+def morse_code():
+    TEXT = string_input.get()
+    for alphabet in TEXT:
+        for dot_dash in Code[alphabet.upper()]:
+            if dot_dash == '-':
+                Dash_func()
+            elif dot_dash == '.':
+                Dot_func()
+            else:
+                time.sleep(0.13)
+        time.sleep(1) 
 
+string_input = Entry(win, font = Font_style, width = 20)
+string_input.grid(row = 0, column = 0)
+
+button = Button(win, text = 'MORSE-CODE-CONVERT', font = Font_style, command = morse_code, height = 2, width = 20)
+button.grid( row =0, column = 3)
+
+win.mainloop()
