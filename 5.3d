@@ -6,7 +6,8 @@ from gpiozero import led
 
 GPIO.setmode(GPIO.BCM)
 
-Code = {
+Code = 
+{
 'A' : '.-' , 'B' : '-...' , 'C' : '-.-.' , 'D' : '-..' ,
 'E' : '.' , 'F' : '..-.' , 'G' : '--.' ,'H' : '....' ,
 'I' : '..' ,'J' : '.---' , 'K' : '-.-' ,'L' : '.-..' , 
